@@ -1,4 +1,4 @@
-## Zadanie 2
+## Zadanie 3
 
 Płatność kartą.
 
