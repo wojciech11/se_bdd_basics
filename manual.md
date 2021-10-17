@@ -82,4 +82,7 @@
    behave
    ```
 
-5. Na zasadzie analogi utwórz drugi scenariusz w `example.features`. Skorzystaj z komendy `behave -q`, aby zobaczyć czy nie popełniłaś/popełniłeś błędów.
+5. Na zasadzie analogi utwórz drugi scenariusz w `example.features`. Skorzystaj z:
+
+   - `behave -q` dla walidacji gherkin, aby zobaczyć czy nie popełniłaś/popełniłeś błędów,
+   - `behave`, jeśli dodałaś/dodałeś implementacjie w Pythonie.
