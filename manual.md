@@ -55,7 +55,7 @@
    behave -q
    ```
 
-4. Zaimplementujmy teraz nasze kroki:
+4. Zaimplementujmy teraz nasze kroki `steps/step_food.py`:
 
    ```python
    from behave import given, when, then, step
