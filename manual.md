@@ -30,7 +30,7 @@
      \- example/
           \- features/
                |- steps/
-               \- example.features   
+               \- example.feature
    ```
 
 2. Napisz swój pierwszy opis zachowania dla twojej funkcjonalności:
