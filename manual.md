@@ -44,7 +44,7 @@
      Then I should have 2 cucumbers
    ```
 
-3. W terminalu z poziomu Atoma (Plugins -> platformio-ide-terminal-> Toggle) uruchom:
+3. W terminalu z poziomu Atoma (Packages -> platformio-ide-terminal-> Toggle) uruchom:
 
    ```bash
    python3 -m venv venv
