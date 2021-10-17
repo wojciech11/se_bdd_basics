@@ -41,6 +41,8 @@ def step_check_cart_value(context, value):
 
 
 def create_user_with_empty_cart():
+    # jeśli musimy przygotować cokolwiek
+    # przed testem
     pass
 
 
