@@ -1,6 +1,6 @@
 ## Zadanie 1
 
-Przykład scenariusza dla obsługi koszyka w sklpie internetowym.
+Przykład scenariusza dla obsługi koszyka w sklepie internetowym.
 
 ```bash
 behave

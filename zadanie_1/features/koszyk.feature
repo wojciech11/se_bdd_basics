@@ -4,4 +4,4 @@ Feature: Zmiana wartosci koszyka
     Given pusty koszyk
      When dodaje produkt spodnie o wartosci 100.0
      Then koszyk ma 1 rzecz
-      and wartosc koszyka to 100.0
+      And wartosc koszyka to 100.0
