@@ -23,7 +23,7 @@
 
 ## Pierwszy test
 
-1. Utwórz następujące drzewo katalogów oraz jeden plik `example.features`:
+1. Utwórz następujące drzewo katalogów oraz jeden plik `example.feature`:
 
    ```
    workspace/
