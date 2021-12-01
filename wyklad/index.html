@@ -1,0 +1,757 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>WSB - Wprowadzenie do testowania oprogramowania</title>
+
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="ext/bootstrap-4.0.0-beta/bootstrap.min.css">
+
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<style>
+			.reveal section img {
+				background-color:white;
+				border:0;
+				box-shadow: 0 0 0 0;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h3>W<span style="text-transform: lowercase;">prowadzenie<br />do testowania oprogramowania</span></h3>
+					<img width="60%" src="img/analogia_frigate_pallada.jpg" />
+					<!-- https://en.wikipedia.org/wiki/File:FrigatePallada.jpg -->
+
+					<h5>B<span style="text-transform: lowercase;">ehaviour </span>D<span style="text-transform: lowercase;">riven </span>D<span style="text-transform: lowercase;">evelopment</span> P<span style="text-transform: lowercase;">odstawy</span></h5>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### I<span style="text-transform: lowercase;">nspiracja</span>
+
+- James Bach? Robert C. Martin? ... ?
+- Marty Cagan from [svpg](https://svpg.com/)?
+- Desingers? [Product Mgmt](https://productschool.com/blog/)?
+- [Startups](www.startupschool.org)?
+- Pragmatyczny programista? Design Patterns?
+					</script>
+				</section>
+
+
+				<section data-markdown>
+					<script type="text/template">
+### O<span style="text-transform: lowercase;">statnie zajęcia</span>
+
+- Wasze pytania
+- Przypadek testowy
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### Ć<span style="text-transform: lowercase;">wiczenie</span>
+
+1. Problem
+2. Mierzymy się z zadaniem samemu [timebox]
+3. Pytamy
+4. Zrobiłam / Zrobiłem - warto pokazać
+5. Chyba, że wykładowca nie poprosi, copy&paste zakazane
+
+<p><small>Rekomendacja: własny laptopem*</small></p>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### B<span style="text-transform: lowercase;">ehaviour </span>D<span style="text-transform: lowercase;">riven </span>D<span style="text-transform: lowercase;">evelopment</span>
+
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### BDD
+
+- Jak się dogadać?
+
+<img src="https://huddle.eurostarsoftwaretesting.com/wp-content/uploads/2016/08/funny-req-product.jpg" width="80%" />
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+"Behaviour-driven Development polega na tworzeniu oprogramowania przez opisywanie jego zachowania, z perspektywy jego udziałowców."
+				[D. North]
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### W<span style="text-transform: lowercase;">spólny język</span>
+
+<img src="img/Blog_Babelfish-750x422-c-default.png" />
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### M<span style="text-transform: lowercase;">yśleć jak użytkownik</span>
+
+<img src="img/app_delivered.jpg" width="60%" />
+
+<p>Skupienie na testach akceptacyjnych</p>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### K<span style="text-transform: lowercase;">omunikacja</span>
+
+- Wszyscy uczestnicy (+ biznes) odwoływali się i myśleli o systemie w ten sam sposób
+- Zmniejszenie bariery pomiędzy technicznymi i nietechnicznymi członkami zespołu
+- Skupienie na testach akceptacyjnych
+- Najlepsze poznanie potrzeb, celów oraz oczekiwań
+					</script>
+				</section>
+
+
+
+				<section data-markdown>
+					<script type="text/template">
+### S<span style="text-transform: lowercase;">formalizowanie języka</span>
+
+- **Given** - stan początkowy
+- **When** - akcja
+- **Then** - stan końcowy
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### S<span style="text-transform: lowercase;">formalizowanie języka</span>
+
+- **Feature** - funkcjonalność
+- **Scenario** - scenariusz
+- **And** - łączenie wielu warunków
+- **Background** - akcje przed scenariuszem
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+#### G<span style="text-transform: lowercase;">herkin</span>
+
+<p style="font-size:26px" align="left">
+
+**Title**: Returns and exchanges go to inventory.<br />
+<br />
+**As a** store owner,<br />
+**I want** to add items back to inventory when they are returned or exchanged,<br />
+**so that** I can track inventory.<br />
+<br />
+**Scenario 1**: Items returned for refund should be added to inventory.<br />
+&nbsp;&nbsp;** Given** a customer previously bought a black sweater from me<br />
+&nbsp;&nbsp;**and** I have three black sweaters in inventory,<br />
+&nbsp;&nbsp;**when** they return the black sweater for a refund,<br />
+&nbsp;&nbsp;**then** I should have four black sweaters in inventory.
+</p>
+<p><small style="font-size:10px">Example from [wikipedia](https://en.wikipedia.org/wiki/Behavior-driven_development#Principles_of_BDD)</small></p>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+#### G<span style="text-transform: lowercase;">herkin</span>
+
+- tłumaczony na kod:
+
+```python
+@given("a customer previously bought a black sweater from me")
+def step(context):
+    pass
+```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+#### G<span style="text-transform: lowercase;">herkin</span>
+<img src="https://www.getxray.app/hubfs/Imported_Blog_Media/Graphic-AlignCustomers-with-BDD-diagram.svg" >
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+#### G<span style="text-transform: lowercase;">herkin</span>
+
+Zapraszamy do pracy nad definicjami:
+
+- Bizness
+- Designerów
+- Product Mgmt/Owner
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### J<span style="text-transform: lowercase;">ako narzędzie</span>
+
+- Jeden ze standardów w automatyzacji
+- Prosta składnia – niewiele słów kluczowych
+- Ustandaryzowana struktura zrozumiała dla wszystkich uczestników projektu
+- Łatwiejsze zarządzanie (np. parametryzacja)
+- Przydatny w analizie wymagań
+					</script>
+				</section>
+
+
+
+				<section data-markdown>
+					<script type="text/template">
+### W<span style="text-transform: lowercase;">ady</span>
+
+- Dodatkowa rzecz do napisania
+- Wymaga dużego zaangażowania i współpracy
+- Wciągnąć bizness do pracy z Gharkinem może być trudne
+- Źle napisane specyfikacje są kosztowne w utrzymaniu
+					</script>
+				</section>
+
+
+				<section data-markdown>
+					<script type="text/template">
+### F<span style="text-transform: lowercase;">rameworks</span>
+
+- Python Behave
+- JBehave
+- cucumber.io
+- [radish-bdd](https://github.com/radish-bdd/radish)
+- Robot Framework
+- RSpec
+- [Go Ginkgo](https://github.com/onsi/ginkgo)
+
+<p><small>[Editors](https://cucumber.io/docs/tools/general/)</small></p>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### BDD <span style="text-transform: lowercase;">vs</span> TDD
+
+- Podobne, z dodatkowym krokiem określenia zachowania
+- Nie będziemy omawiać tego aspektu w detalach
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### P<span style="text-transform: lowercase;">ython</span> B<span style="text-transform: lowercase;">ehave</span>
+
+<img src="https://behave.github.io/behave.example/_images/behave_logo1.png" />
+					</script>
+				</section>
+
+				<!-- section data-markdown>
+					<script type="text/template">
+### P<span style="text-transform: lowercase;">rzykłady</span>
+
+```gherkin
+Scenario: Adding an item "XYZ" to basket
+  Given Logged as "ABC"
+  When Add "XYZ" with price "12" to the backet
+  Then "XYZ" in the basket and increase the basket value
+```
+					</script>
+				</section -->
+
+				<section data-markdown>
+					<script type="text/template">
+#### F<span style="text-transform: lowercase;">eature</span>
+
+```gherkin
+# -- FILE: features/example.feature
+Feature: Showing off behave
+
+  Scenario: Run a simple test
+    Given we have behave installed
+     When we implement 5 tests
+     Then behave will test them for us!
+```
+
+<p><small style="font-size:10px">[Behave tutorial](https://github.com/behave/behave)</small></p>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+#### S<span style="text-transform: lowercase;">teps</span>
+
+```python
+# -- FILE: features/steps/example_steps.py
+from behave import given, when, then, step
+
+@given('we have behave installed')
+def step_impl(context):
+    pass
+
+@when('we implement {number:d} tests')
+def step_impl(context, number):
+    pass
+
+@then('behave will test them for us!')
+def step_impl(context):
+    pass
+```
+<!-- p><small style="font-size:10px">[Behave tutorial](https://github.com/behave/behave)</small></p -->
+					</script>
+				</section>
+
+
+				<section data-markdown>
+					<script type="text/template">
+### D<span style="text-transform: lowercase;">emo</span>
+
+- [github.com/wojciech11/se_bdd_basics](github.com/wojciech11/se_bdd_basics/tree/master/zadanie_1)
+
+```bash
+git clone https://github.com/wojciech11/se_bdd_basics.git
+cd se_bdd_basics
+
+# opcjonalne
+python3 -m venv .venv
+source .venv/bin/activate
+
+cd zadanie_1
+behave
+```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### N<span style="text-transform: lowercase;">ajlepsze </span> P<span style="text-transform: lowercase;">raktyki </span>
+
+* Given: present or present perfect tenses
+* When: present tenses
+* Then: future or "should"
+
+<p><small style="font-size:14px">Best Practices: [1](https://cucumber.io/docs/bdd/better-gherkin/), [2](https://support.smartbear.com/cucumberstudio/docs/tests/best-practices.html)</small></p>
+					</script>
+				</section>
+<!-- https://automationpanda.com/2017/01/30/bdd-101-writing-good-gherkin/ -->
+<!-- https://www.youtube.com/watch?v=nrggIRWK6qo -->
+<!-- https://www.youtube.com/watch?v=zYj70EsD7uI -->
+<!-- https://dannorth.net/introducing-bdd/ -->
+
+				<section data-markdown>
+					<script type="text/template">
+### N<span style="text-transform: lowercase;">ajlepsze </span> P<span style="text-transform: lowercase;">raktyki </span>
+
+* Avoid the procedure-driven scenarios
+* Declarative vs Imperative
+<p><small style="font-size:14px">Best Practices: [1](https://cucumber.io/docs/bdd/better-gherkin/), [2](https://support.smartbear.com/cucumberstudio/docs/tests/best-practices.html)</small></p>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### Ć<span style="text-transform: lowercase;">wiczenia </span>P<span style="text-transform: lowercase;">raktyczne</span>
+
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### Ś<span style="text-transform: lowercase;">rodowisko</span>
+
+- linux
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### P<span style="text-transform: lowercase;">rzygotowanie</span>
+
+Instrukcja: https://github.com/wojciech11/se_bdd_basics
+
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### P<span style="text-transform: lowercase;">rzygotowanie</span>
+
+- uruchom `Terminal`
+
+```bash
+sudo apt-get install python3-venv python3-pip -y
+sudo snap install atom --classic
+
+mkdir -p workspace
+cd workspace
+
+# zauważ kropka
+atom .
+```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### P<span style="text-transform: lowercase;">rzygotowanie</span> - A<span style="text-transform: lowercase;">tom</span>
+
+Zainstaluj plugin w Atomie (Edit->Preferences):
+
+- `cucumber`
+- `platformio-ide-terminal`
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### P<span style="text-transform: lowercase;">ierwszy test</span> - A<span style="text-transform: lowercase;">tom</span>
+
+<p>Struktura naszego pojektu:</p>
+
+```
+workspace/
+  \- example/
+       \- features/
+            |- steps/
+            \- example.feature
+```
+					</script>
+				</section>
+<!--
+
+- utwórz katalog *example/* w *workspace/*
+- utwórz katalog *features/* w *example/*
+- w katalogu *features/*, utwórz nowy plik: *example.feature*
+- w katalogu *features/*, utwórz nowy katalog *steps/*
+-->
+
+				<section data-markdown>
+					<script type="text/template">
+### P<span style="text-transform: lowercase;">ierwsze test</span>
+
+`example.feature`:
+
+```gherkin
+Feature: Healthy food
+
+Scenario: eating
+  Given there were 5 cucumbers
+  When I eat 3 cucumbers
+  Then I should have 2 cucumbers
+```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### P<span style="text-transform: lowercase;">ierwsze test</span>
+
+- Packages -> platformio-ide-terminal-> Toggle
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -U behave
+
+behave -q
+```
+					</script>
+				</section>
+
+				<!-- section data-markdown>
+					<script type="text/template">
+## P<span style="text-transform: lowercase;">ierwsze test</span>
+
+Na zasadzie analogi utwórz drugi scenariusz w `example.features`.
+					</script>
+				</section -->
+
+				<section data-markdown>
+					<script type="text/template">
+### I<span style="text-transform: lowercase;">mplementacja testu</span>
+
+steps/food.py:
+
+```python
+from behave import given, when, then, step
+
+@given("there were 5 cucumbers")
+def step_cucumber(context):
+    pass
+
+@when("I eat 3 cucumbers")
+def step_eating(context):
+    pass
+
+@then("I should have 2 cucumbers")
+def step_after(context):
+    pass
+```
+
+<!-- p><small>https://github.com/wojciech11/se_bdd_basics/blob/master/zadanie_1/features/steps/koszyk_steps.py </small></p-->
+					</script>
+				</section>
+
+
+				<section data-markdown>
+					<script type="text/template">
+### I<span style="text-transform: lowercase;">mplementacja testu</span>
+
+```bash
+# bez -q uruchamiam również kod
+behave
+```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### K<span style="text-transform: lowercase;">olejny scenariusz</span>
+
+- Na zasadzie analogi, proszę zbudować jeszcze jeden scenariusz.
+- `behave -q` dla walidacji gherkin
+- `behave`, jeśli dopiszenie kod python
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### P<span style="text-transform: lowercase;">aremetryzacja</span>
+
+steps/food.py:
+
+```python
+from behave import given, when, then, step
+
+@given("there were {number:d} cucumbers")
+def step_cucumber(context, number):
+    pass
+
+@when("I eat {number:d} cucumbers")
+def step_eating(context, number):
+    pass
+
+@then("I should have {number:d} cucumbers")
+def step_after(context, number):
+    pass
+```
+
+<!-- p><small>https://github.com/wojciech11/se_bdd_basics/blob/master/zadanie_1/features/steps/koszyk_steps.py </small></p-->
+					</script>
+				</section>
+
+				<section data-background="img/gherkin_prefer.png" data-background-repeat="" data-background-size="90%">
+				</section>
+
+				<section data-background="img/gherkin_too_simple.png" data-background-repeat="" data-background-size="90%">
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### Z<span style="text-transform: lowercase;">adanie 1</span>
+
+<img src="https://securionpay.com/wp-content/uploads/2020/01/hidden-promo-code-checkout-1.png" />
+
+<p><small>https://securionpay.com/blog/best-payment-form-ux-practices/#a7</small></p>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### Z<span style="text-transform: lowercase;">adanie 2</span>
+
+Jako potencjalny klient apteki www.apteka.test chcę mieć możliwość zapisać się do newslettera, aby być na bieżąco informowanym na temat aktualnych promocji apteki.
+
+					</script>
+				</section>
+
+
+				<section data-markdown>
+					<script type="text/template">
+* Opis funkcjonalności
+  * Na głównej stronie www.apteka.test jest pole z napisem "zostaw email" i przycisk "zapisz mnie"
+  * Po podaniu poprawnego maila i kliknięciu przycisku, otwiera się nowy widok z komunikatem informującym o wysłaniu linka aktywacyjnego.
+
+* Obsługa błędów
+  * Przy próbie zapisania do newslettera bez podania adresu, pojawia się komunikat o treści “Formularz zawiera błędy. Sprawdź poprawność danych”
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### Z<span style="text-transform: lowercase;">adanie 3</span>
+
+```gherkin
+Scenario: Eating
+  Given there were <start> cucumbers
+  When I eat <eat> cucumbers
+  Then I should have <left> cucumbers
+
+  Examples:
+    | start | eat | left |
+    |    5  |  2  |  3   |
+    |    3  |  3  |  0   |
+    |    0  |  0  |  0   |
+```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### Z<span style="text-transform: lowercase;">adanie 3</span>
+
+<img src="img/emil_haslo.png" />
+
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### Z<span style="text-transform: lowercase;">adanie 3</span>
+* Jako użytkownik codeacademy chcę mieć możliwość filtrowania w katalogu dostępnych kursów, aby szybciej znaleźć interesujący mnie kurs.
+
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+* Opis funkcjonalności:
+  * kategorie filtrów: temat, język
+  * w kategorii temat dostępne opcje: Full Catalog, Web Development, Programming, Data Science, Partnerships, Design
+  * w kategorii język dostępne opcje: HTML & CSS, Python, JavaScript, Java, SQL, Bash/Shell, Ruby
+  * nie można wybrać języka i tematu jednocześnie
+  * zaznaczonej opcji nie można odznaczyć, można wybrać tylko inną opcję
+  * domyślnie zaznaczoną opcją jest Full Catalog
+					</script>
+				</section>
+
+
+				<!-- section>
+					<div class="container">
+						<div class="row">
+							<div class='col-md-6'>
+								<img width="100%" style="object-fit: fill;" src="img/reflector_49842649546_b4cea27ea5_c.jpg" />
+								< ! - - https://www.flickr.com/photos/mustadmarine/49842649546/ -->
+							<!-- /div>
+							<div class='col-md-6'>
+								<p>Kto to jest tester oprogramowania?</p>
+								<ul>
+									<li>Reflektor, każdego projektu</li>
+									<li>Obserwator na dziobie okrętu</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</section -->
+
+
+				<section data-markdown>
+					<script type="text/template">
+### R<span style="text-transform: lowercase;">eferencje</span>
+
+- https://dannorth.net/introducing-bdd/
+- https://jenisys.github.io/behave.example/tutorials
+
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### S<span style="text-transform: lowercase;">posób myślenia</span>
+
+**Given-When-Then** jest pomoga opisywać funkcjonalność w testach czy designie:
+
+```python
+# Given: we are logged in
+def when_pageOpended_then_counterIncrease():
+	pass
+```
+					</script>
+				</section>
+
+			<!--
+				Koniec
+			-->
+			<section>
+				<h3>Dziękuję za uwagę</h3>
+
+				<!-- img src="img/reflector_49842649546_b4cea27ea5_c.jpg" width="60%" / -->
+				<h5>W<span style="text-transform: lowercase;">ojciech</span> B<span style="text-transform: lowercase;">arczyński </span></h5>
+				<!-- h4><span style="text-transform: lowercase;">wojciech.barczynski@wsb.wroclaw.pl</span></h4 -->
+			</section>
+
+			<section data-markdown>
+				<script type="text/template">
+#### Backup Slides
+
+				</script>
+			</section>
+
+			<section data-markdown>
+				<script type="text/template">
+### T<span style="text-transform: lowercase;">esty</span>
+
+<img width="50%" src="img/testing_pyramid_precise.png" />
+				</script>
+			</section>
+
+			<section data-background="img/tester_przyklad_python_technologie.png" data-background-repeat="" data-background-size="100%">
+			</section>
+
+			<!--
+			https://github.com/wojciech11/how_to_start_your_it_career
+			-->
+
+			<!-- section>
+				<h3>Licencja</h3>
+				<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0; width:40%" src="img/licence-by.svg" /></a><br />This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons<br /> Attribution 4.0 International License</a>
+			</section -->
+
+			</div>
+		</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/dependencies.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
